@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^api-token/', obtain_jwt_token),
     url(r'^$', schema_view),
     url(r'^accounts/', admin.site.urls),
-
+    url(r'^', include('events.urls')),
 ]
