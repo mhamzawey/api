@@ -7,6 +7,7 @@ import datetime
 class CoBerlin(scrapy.Spider):
     name = "co_berlin"
     BASE_URL = "https://www.co-berlin.org/en"
+
     def start_requests(self):
         urls = [
             self.BASE_URL+"/calender",
