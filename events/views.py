@@ -23,5 +23,3 @@ class EventList(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_class = EventFilter
-    # filter_backends = [DjangoFilterBackend]
-    # filter_fields = ('id','title','description','category','start_date','end_date','link','created_at','updated_at')
