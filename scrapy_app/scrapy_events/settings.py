@@ -9,11 +9,20 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+
+import sys
+sys.path.append('/app')
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'api.settings'
+
+import django
+django.setup()
+
 BOT_NAME = 'events'
 
-SPIDER_MODULES = ['events.spiders']
-NEWSPIDER_MODULE = 'events.spiders'
-
+SPIDER_MODULES = ['scrapy_events.spiders']
+NEWSPIDER_MODULE = 'scrapy_events.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'events (+http://www.yourdomain.com)'

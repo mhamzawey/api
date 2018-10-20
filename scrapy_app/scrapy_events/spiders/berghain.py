@@ -1,9 +1,16 @@
 import scrapy
 import string
+from events.models import Event
+from events.serializers import EventSerializer
+import io
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
 
 import datetime
 
 #http://berghain.de/events/
+
+
 class Berghain(scrapy.Spider):
     name = "berghain"
 
@@ -30,7 +37,6 @@ class Berghain(scrapy.Spider):
         return ''.join(filter(lambda x: x in printable, text))
 
     def parse(self, response):
-        list = []
         for type in response.css(".navi_level3_extra ::attr(class)"):
             if type.extract() != "navi_level3_extra":
                 _class = ".col_teaser_{}"
@@ -43,16 +49,20 @@ class Berghain(scrapy.Spider):
                     category = response.css("."+type.extract() +"::text").extract_first()
                     href = self.BASE_URL + event.css("."+type.extract()+" ::attr(href)").extract_first()
                     desc = event.css("."+type.extract()+"_color span::text").extract()[1]
-                    dict['title'] = self.clean_text(title)
-                    dict['start_date'] = start
-                    dict['end_date'] = end
-                    dict['category'] = category
-                    dict['description'] = self.clean_text(desc)
-                    dict['link'] = href
-                    list.append(dict)
 
 
-        for item in list:
-             yield item
+
+
+                    event_object = Event(title=title,start_date=start,end_date=end,category=category,link=href,description=desc)
+                    serializer = EventSerializer(event_object)
+                    content = JSONRenderer().render(serializer.data)
+                    stream = io.BytesIO(content)
+                    data = JSONParser().parse(stream)
+                    serializer = EventSerializer(data=data)
+                    serializer.is_valid()
+                    serializer.save()
+
+
+
 
 

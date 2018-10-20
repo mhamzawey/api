@@ -1,6 +1,11 @@
 import scrapy
 import string
 import datetime
+from events.models import Event
+from events.serializers import EventSerializer
+import io
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
 
 
 
@@ -36,13 +41,14 @@ class CoBerlin(scrapy.Spider):
                 start = datetime.datetime.strptime(start, '%Y-%m-%d').strftime('%d/%m/%y')
                 end = start
 
-            yield {
-                'title': self.clean_text(title),
-                'category': self.clean_text(category),
-                'description': self.clean_text(desc),
-                'start_date': start,
-                'end_date': end,
-                'link':href
-            }
+
+            event_object = Event(title=title,start_date=start,end_date=end,category=category,link=href,description=desc)
+            serializer = EventSerializer(event_object)
+            content = JSONRenderer().render(serializer.data)
+            stream = io.BytesIO(content)
+            data = JSONParser().parse(stream)
+            serializer = EventSerializer(data=data)
+            serializer.is_valid()
+            serializer.save()
 
 
