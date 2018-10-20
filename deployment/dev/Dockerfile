@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 
 RUN apt-get update
-RUN apt-get -y install locales mysql-client vim python3 python3-pip libmysqlclient-dev python3-dev libffi-dev libssl-dev
+RUN apt-get -y install locales mysql-client vim python3 python3-pip libmysqlclient-dev python3-dev libffi-dev libssl-dev git
 RUN locale-gen en_US.UTF-8
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \

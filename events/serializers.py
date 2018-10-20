@@ -4,13 +4,15 @@ from rest_framework import serializers
 
 
 class EventSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(max_length=150)
     description = serializers.CharField(max_length=225)
     category = serializers.CharField(max_length=80)
     start_date = serializers.CharField(max_length=80)
     end_date = serializers.CharField(max_length=80)
     link = serializers.URLField(max_length=128)
-
+    created_at = serializers.DateTimeField(read_only=True)
+    updated_at = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = Event
