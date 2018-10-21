@@ -20,7 +20,7 @@ class EventFilter(filters.FilterSet):
             'link':['exact','in'],
             'created_at':['exact','lte','gte','lt','gt','in'],
             'updated_at':['exact','lte','gte','lt','gt','in']
-        }
+
 
 class EventList(viewsets.ModelViewSet):
     queryset = Event.objects.all()
