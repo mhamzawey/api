@@ -1,5 +1,9 @@
+
 import scrapy
 import string
+
+from django.db import IntegrityError
+
 from events.models import Event
 from events.serializers import EventSerializer
 import io
@@ -8,8 +12,8 @@ from rest_framework.renderers import JSONRenderer
 
 import datetime
 
-#http://berghain.de/events/
-
+import logging
+logger = logging.getLogger(__name__)
 
 class Berghain(scrapy.Spider):
     name = "berghain"
@@ -44,23 +48,25 @@ class Berghain(scrapy.Spider):
                     dict = {}
                     date =[x.strip() for x in event.css("."+type.extract()+" ::attr(title)").extract_first().split(':')][0]
                     title = [x.strip() for x in event.css("."+type.extract()+" ::attr(title)").extract_first().split(':')][1]
-                    start = datetime.datetime.strptime(date, '%a %d %B %Y').strftime('%d/%m/%y')
-                    end = datetime.datetime.strptime(date, '%a %d %B %Y').strftime('%d/%m/%y')
+                    start = datetime.datetime.strptime(date, '%a %d %B %Y').strftime('%Y-%m-%d')
+                    end = datetime.datetime.strptime(date, '%a %d %B %Y').strftime('%Y-%m-%d')
                     category = response.css("."+type.extract() +"::text").extract_first()
                     href = self.BASE_URL + event.css("."+type.extract()+" ::attr(href)").extract_first()
                     desc = event.css("."+type.extract()+"_color span::text").extract()[1]
 
-
-
-
-                    event_object = Event(title=title,start_date=start,end_date=end,category=category,link=href,description=desc)
+                    event_object = Event(title=title,start_date=start,
+                                         end_date=end,category=category,
+                                         link=href,description=desc)
                     serializer = EventSerializer(event_object)
                     content = JSONRenderer().render(serializer.data)
                     stream = io.BytesIO(content)
                     data = JSONParser().parse(stream)
                     serializer = EventSerializer(data=data)
                     serializer.is_valid()
-                    serializer.save()
+                    try:
+                        serializer.save()
+                    except IntegrityError as e:
+                        logger.error(e.__str__())
 
 
 

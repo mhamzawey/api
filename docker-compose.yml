@@ -25,7 +25,7 @@ services:
     depends_on:
     - mysqldb
     networks: ['stack']
-    command: sh -c "sleep 30  && python3 convert_database_utf8.py && python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py loaddata deployment/dev/admin_fixture.json && python3 manage.py runserver 0.0.0.0:8000"
+    command: sh -c "sleep 10 && pip3 install git+https://github.com/philipn/django-rest-framework-filters && python3 convert_database_utf8.py && python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py loaddata deployment/dev/admin_fixture.json && python3 manage.py runserver 0.0.0.0:8000"
 
 networks:
   stack:

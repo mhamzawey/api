@@ -3,12 +3,12 @@ from django.db import models
 
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(null=True, blank=True, max_length=150)
-    description = models.CharField(null=True, blank=True, max_length=225)
+    title = models.CharField(null=True, blank=True, max_length=225)
+    description = models.TextField(null=True, blank=True)
     category = models.CharField(null=True, blank=True, max_length=80)
-    start_date = models.CharField(null=True, blank=True,max_length=80)
-    end_date = models.CharField(null=True, blank=True,max_length=80)
-    link = models.URLField(null=True, blank=True,max_length=128)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    link = models.URLField(null=True, blank=True,max_length=225,unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
