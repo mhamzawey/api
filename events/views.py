@@ -1,9 +1,5 @@
-from django.shortcuts import render
-
-# Create your views here.
 from rest_framework import viewsets
 import rest_framework_filters as filters
-
 from events.models import Event
 from events.serializers import EventSerializer
 
@@ -17,7 +13,7 @@ class EventFilter(filters.FilterSet):
             'category':['exact', 'in', 'startswith','contains'],
             'start_date':['exact','lte','gte','lt','gt','in'],
             'end_date':['exact','lte','gte','lt','gt','in'],
-            'link':['exact','in'],
+            'link':['exact','in','contains'],
             'created_at':['exact','lte','gte','lt','gt','in'],
             'updated_at':['exact','lte','gte','lt','gt','in']
         }
