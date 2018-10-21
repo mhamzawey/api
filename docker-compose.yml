@@ -27,6 +27,23 @@ services:
     networks: ['stack']
     command: sh -c "sleep 10 && service cron restart &&pip3 install git+https://github.com/philipn/django-rest-framework-filters && python3 convert_database_utf8.py && python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py loaddata deployment/dev/admin_fixture.json && python3 manage.py runserver 0.0.0.0:8000"
 
+
+  react_front:
+    image: react_front:latest
+    build:
+      context: front-end/
+      dockerfile: Dockerfile
+    container_name: react_front
+    volumes:
+    - ./front-end:/app
+    ports:
+    - "3000:3000"
+    depends_on:
+    - mysqldb
+    - api
+    networks: ['stack']
+    command: sh -c "npm start"
+
 networks:
   stack:
     driver: bridge
