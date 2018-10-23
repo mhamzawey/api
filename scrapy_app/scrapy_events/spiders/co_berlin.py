@@ -47,7 +47,8 @@ class CoBerlin(scrapy.Spider):
 
             event_object = Event(title=title, start_date=start,
                                  end_date=end,category=category,
-                                 link=href,description=desc)
+                                 link=href,description=desc,
+                                 web_source="Co-Berlin")
 
             serializer = EventSerializer(event_object)
             content = JSONRenderer().render(serializer.data)

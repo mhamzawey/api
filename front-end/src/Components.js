@@ -65,6 +65,7 @@ export class EventRow extends React.Component {
                 <td>{event.category}</td>
                 <td>{event.start_date}</td>
                 <td>{event.end_date}</td>
+                <td>{event.web_source}</td>
                 <td><a href={event.link}>Visit Event</a></td>
 
 
@@ -141,6 +142,7 @@ export class EventTable extends React.Component {
                         <th scope="row">Category</th>
                         <th scope="row">Start Date</th>
                         <th scope="row">End Date</th>
+                        <th scope="row">Web Source</th>
                         <th scope="row">Link</th>
                     </tr>
                     </thead>

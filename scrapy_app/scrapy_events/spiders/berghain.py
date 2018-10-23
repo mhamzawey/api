@@ -45,7 +45,6 @@ class Berghain(scrapy.Spider):
             if type.extract() != "navi_level3_extra":
                 _class = ".col_teaser_{}"
                 for event in response.css(_class.format(type.extract())):
-                    dict = {}
                     date =[x.strip() for x in event.css("."+type.extract()+" ::attr(title)").extract_first().split(':')][0]
                     title = [x.strip() for x in event.css("."+type.extract()+" ::attr(title)").extract_first().split(':')][1]
                     start = datetime.datetime.strptime(date, '%a %d %B %Y').strftime('%Y-%m-%d')
@@ -56,7 +55,8 @@ class Berghain(scrapy.Spider):
 
                     event_object = Event(title=title,start_date=start,
                                          end_date=end,category=category,
-                                         link=href,description=desc)
+                                         link=href,description=desc,
+                                         web_source="Berghain")
                     serializer = EventSerializer(event_object)
                     content = JSONRenderer().render(serializer.data)
                     stream = io.BytesIO(content)

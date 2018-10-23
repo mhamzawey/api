@@ -17,6 +17,7 @@ class EventFilter(FilterSet):
             'start_date':['exact','lte','gte','lt','gt','in'],
             'end_date':['exact','lte','gte','lt','gt','in'],
             'link':['exact','in','contains'],
+            'web_source':['exact', 'in', 'startswith','contains'],
             'created_at':['exact','lte','gte','lt','gt','in'],
             'updated_at':['exact','lte','gte','lt','gt','in']
         }
@@ -26,7 +27,7 @@ class EventList(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('title', 'description','category', 'start_date', 'end_date')
+    search_fields = ('title', 'description','category','web_source','start_date', 'end_date')
 
     def get_permissions(self):
         """
