@@ -26,7 +26,7 @@ class EventList(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('title', 'description','category')
+    search_fields = ('title', 'description','category', 'start_date', 'end_date')
 
     def get_permissions(self):
         """
