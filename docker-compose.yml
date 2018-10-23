@@ -37,10 +37,10 @@ services:
     volumes:
     - ./front-end:/app
     ports:
-    - "3000:3000"
+      - "3000:3000"
     depends_on:
-    - mysqldb
-    - api
+      - mysqldb
+      - api
     networks: ['stack']
     command: sh -c "npm build && npm start"
 
