@@ -10,7 +10,7 @@ class App extends Component {
             _events: null
         };
 
-        getEvents().then(res => this.setState({_events:res.data.results}))
+        getEvents(0).then(res => this.setState({_events:res.data}))
             .catch(err => alert("An error occurred"));
 
     }
