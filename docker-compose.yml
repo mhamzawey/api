@@ -42,7 +42,7 @@ services:
       - mysqldb
       - api
     networks: ['stack']
-    command: sh -c "npm build && npm start"
+    command: npm start
 
 networks:
   stack:
