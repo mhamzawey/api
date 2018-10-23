@@ -20,7 +20,7 @@ class CoBerlin(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            self.BASE_URL+"/en/calendar",
+            self.BASE_URL+"/en/calender",
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)

@@ -3,8 +3,9 @@ FROM node:7.8.0
 # Override the base log level (info).
 ENV NPM_CONFIG_LOGLEVEL warn
 
-# Install all dependencies of the current project.
-COPY package.json package.json
-RUN npm install
+
 RUN mkdir -p /app
 WORKDIR /app
+COPY package.json /app/package.json
+RUN npm install
+
