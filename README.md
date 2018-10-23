@@ -36,7 +36,9 @@ git clone  https://github.com/mhamzawey/dalia_challenge api
 
 2- docker-compose up -d --build
 
-3- Go to your browser:
+3- wait 2-3 minutes till the composer builds and starts the containers
+
+4- Go to your browser:
 
     - To access the swagger documentation for the api visit -> http:localhost:4000/swagger, to see the whole CRUD use session login, username: admin ,password:123456
 
