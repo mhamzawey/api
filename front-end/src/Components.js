@@ -1,5 +1,6 @@
 import React  from 'react';
 import Modal from 'react-modal';
+import {getSeachEvent} from "./api";
 
 Modal.setAppElement('#root')
 
@@ -60,10 +61,31 @@ export class EventRow extends React.Component {
     }
 }
 
+
 export class EventTable extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        query: '',
+        _events: this.props._events
+    };
+
+    handleInputChange = () => {
+
+        if (this.search.value.length >=3){
+
+            getSeachEvent(this.search.value).then(res => this.setState({_events:res.data.results}))
+                .catch(err => alert("An error occurred"));
+        }else{
+            this.setState({_events:this.props._events})
+        }
+
+
+    };
     render() {
         const rows = [];
-        this.props._events.forEach((event) => {
+        this.state._events.forEach((event) => {
             rows.push(<EventRow event={event} key={`event-${event.id}`}/>
             );
         });
@@ -73,6 +95,18 @@ export class EventTable extends React.Component {
                 <div className="row" style={{justifyContent:"center"}}>
                     <h1 style={{textAlign:"center"}}>Daila Calendar</h1>
                 </div>
+                <div className="fa-search row" style={{justifyContent:"center"}}>
+                    <form>
+                        <input
+                            placeholder="Search for..."
+                            style={{textAlign:"center",width:"400px"}}
+                            ref={input => this.search = input}
+                            onChange={this.handleInputChange}
+                        />
+
+                    </form>
+                </div>
+                <br/>
 
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -89,3 +123,4 @@ export class EventTable extends React.Component {
         );
     }
 }
+

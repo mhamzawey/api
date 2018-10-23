@@ -12,3 +12,11 @@ export const getEvents = () => {
     .catch(err => console.log(err));
 };
 
+export const getSeachEvent = (searchterm) => {
+    return new Promise((resolve, reject) => {
+        return axios.get(BASE_URL+events_url+"?search="+searchterm)
+            .then((res) => resolve(res));
+    })
+        .catch(err => console.log(err));
+};
+
