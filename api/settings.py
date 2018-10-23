@@ -86,6 +86,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
+LOGOUT_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -132,7 +135,10 @@ JWT_AUTH = {
 
 }
 
-
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

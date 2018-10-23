@@ -1,4 +1,5 @@
 from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_filters import FilterSet
 from events.models import Event
 from events.serializers import EventSerializer
@@ -26,6 +27,16 @@ class EventList(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title', 'description','category')
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action == 'list':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]
 
 class EventListFilters(generics.ListAPIView):
     queryset = Event.objects.all()

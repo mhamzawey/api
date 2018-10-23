@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api-token/', obtain_jwt_token),
-    url(r'^$', schema_view),
+    url(r'^swagger/$', schema_view),
     url(r'^accounts/', admin.site.urls),
     url(r'^', include('events.urls')),
 ]
