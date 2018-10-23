@@ -30,7 +30,7 @@
 
 **Starting Project:**
 
-git clone  https://github.com/mhamzawey/dalia_challenge
+git clone  https://github.com/mhamzawey/dalia_challenge api
 
 1- cd dalia_challenge
 
