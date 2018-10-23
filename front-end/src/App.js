@@ -22,7 +22,6 @@ class App extends Component {
             return null
         }
         else{
-            console.log(this.state._events);
             return (
                 <EventTable _events={this.state._events} />
             );

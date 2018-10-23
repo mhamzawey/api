@@ -16,11 +16,11 @@ logger = logging.getLogger(__name__)
 
 class CoBerlin(scrapy.Spider):
     name = "co_berlin"
-    BASE_URL = "https://www.co-berlin.org/en"
+    BASE_URL = "https://www.co-berlin.org"
 
     def start_requests(self):
         urls = [
-            self.BASE_URL+"/calender",
+            self.BASE_URL+"/en/calender",
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)

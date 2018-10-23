@@ -118,7 +118,7 @@ export class EventTable extends React.Component {
         const listItems = pages.map((page) =>  <li onClick={this.handlePagination.bind(this,page)} key={`page-${page}`} className="page-item"><a className="page-link" href="#">{page}</a></li>);
 
         return (
-            <div style={{padding:"30px"}}>
+            <div style={{padding:"30px", backgroundColor:"#ffffff"}}>
                 <div className="row" style={{justifyContent:"center"}}>
                     <h1 style={{textAlign:"center"}}>Daila Calendar</h1>
                 </div>
