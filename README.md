@@ -70,7 +70,7 @@ we have three docker contaiers:
 **2- mysqldb:**
 
     - Built on top of mysql:5.7
-    - Doesn't persists data, can be presisted by adding voloumes to the docker-compose file
+    - Doesn't persist data, can be presisted by adding voloumes to the docker-compose file
 
 **3- front-end:**
 
