@@ -85,10 +85,10 @@ export class EventTable extends React.Component {
 
         if (this.search.value.length >=3){
 
-            getSeachEvent(this.search.value).then(res => this.setState({_events:res.data.results}))
+            getSeachEvent(this.search.value).then(res => this.setState({_events:res.data.results, pages:(res.data.count/10)-1}))
                 .catch(err => alert("An error occurred"));
         }else{
-            this.setState({_events:this.props._events.results})
+            this.setState({_events:this.props._events.results, pages:(this.props._events.count/10)-1})
         }
 
 
@@ -104,7 +104,7 @@ export class EventTable extends React.Component {
 
         getEvents(offset).then(res => this.setState({_events:res.data.results}))
             .catch(err => alert("An error occurred"));
-    }
+    };
     render() {
         const rows = [];
         this.state._events.forEach((event) => {
