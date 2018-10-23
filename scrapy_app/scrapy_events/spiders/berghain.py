@@ -20,7 +20,7 @@ class Berghain(scrapy.Spider):
 
     BASE_URL ="http://berghain.de"
 
-    events_url = BASE_URL+"/events/{}"
+    events_url = BASE_URL+"/event/{}"
 
     months = ["2018-10","2018-11","2018-10","2018-12","2018-09","2019-02"]
 
@@ -28,7 +28,7 @@ class Berghain(scrapy.Spider):
 
     urls = []
     for month in months:
-        urls.append(events_url.format(month))
+        urls.append(events_url.format("s"+month))
 
 
 
