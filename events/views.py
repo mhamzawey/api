@@ -1,10 +1,12 @@
-from rest_framework import viewsets
-import rest_framework_filters as filters
+from rest_framework import viewsets, generics
+from rest_framework_filters import FilterSet
 from events.models import Event
 from events.serializers import EventSerializer
+from rest_framework import filters
 
 
-class EventFilter(filters.FilterSet):
+
+class EventFilter(FilterSet):
     class Meta:
         model = Event
         fields = {
@@ -20,6 +22,12 @@ class EventFilter(filters.FilterSet):
 
 
 class EventList(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title', 'description','category')
+
+class EventListFilters(generics.ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_class = EventFilter
