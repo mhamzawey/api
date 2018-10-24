@@ -1,4 +1,6 @@
 container:
   image: mhamzawey/dalia_challenge:latest
 check_task:
-  script: python3 manage.py test
+  script:
+    - pip3 install git+https://github.com/philipn/django-rest-framework-filters
+    - python3 manage.py test
