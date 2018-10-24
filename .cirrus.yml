@@ -1,4 +1,4 @@
 container:
-  dockerfile: mhamzawey/dalia_challenge:latest
+  image: mhamzawey/dalia_challenge:latest
 check_task:
   script: python3 manage.py test
