@@ -30,7 +30,7 @@
 
 **Starting Project:**
 
-git clone  https://github.com/mhamzawey/dalia_challenge api
+`git clone  https://github.com/mhamzawey/dalia_challenge api`
 
 1- cd api
 
@@ -73,8 +73,8 @@ we have three docker contaiers:
                         - updated_at: exact, lte, gte, lt, gt, in
             - Test case: added test case for retrieval of events to assert serializer && response status
             - To run test case manually : `docker exec -it api python3 manage.py test`
-            - USed Cirrus CI which uses dalia_challenge container `.cirrus.yml`
-            
+            - Used Cirrus CI which uses dalia_challenge container `.cirrus.yml`
+    
             
         2- scrappy_app:
             - A crawler that's built on the Scrapy Framework that has two spiders:
@@ -84,6 +84,10 @@ we have three docker contaiers:
             - This is scalable as we can define any other spider we need and handle its case and map it to our own serializer
             - Scrapping done as a crontask that gets registered once the api container is up and running
                 - Cron job runs every 1 minute, this can be enhanced according to the needed time.
+
+<img width="960" alt="capture" src="https://user-images.githubusercontent.com/5594052/47461927-43826580-d7e2-11e8-8ba1-203f879d0749.PNG">
+
+
 **2- mysqldb:**
 
     - Built on top of mysql:5.7
@@ -97,3 +101,4 @@ we have three docker contaiers:
     - There's another endpoint that can filter by dates that you can access via the swagger documentation `events/filter/`
     
  
+
