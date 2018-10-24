@@ -72,6 +72,10 @@ we have three docker contaiers:
                         - created_at: exact, lte, gte, lt, gt, in
                         - updated_at: exact, lte, gte, lt, gt, in
             - Test case: added test case for retrieval of events to assert serializer && response status
+            - To run test case manually : `docker exec -it api python3 manage.py test`
+            - USed Cirrus CI which uses dalia_challenge container `.cirrus.yml`
+            
+            
         2- scrappy_app:
             - A crawler that's built on the Scrapy Framework that has two spiders:
                 - co_berlin: that scrapes the events on co_berlin website
@@ -91,3 +95,5 @@ we have three docker contaiers:
     - A versy simple ReactJS app that integrates with the api
     - It fetches from the `api` the events and has a search bar that does backend searching on `title`, `category`, `description`
     - There's another endpoint that can filter by dates that you can access via the swagger documentation `events/filter/`
+    
+ 
