@@ -37,6 +37,9 @@ git clone  https://github.com/mhamzawey/dalia_challenge api
 2- docker-compose up -d --build
 
 3- wait 2-3 minutes till the composer builds and starts the containers
+P.S: sometimes cron tasks are not triggered automatically,
+so for testing purposes, execute the following command from your terminal:
+``docker exec -it api  python3 /app/scrapy_app/scrapy_events/core.py``
 
 4- Go to your browser:
 
@@ -68,12 +71,15 @@ we have three docker contaiers:
                         - link: exact, in, contains
                         - created_at: exact, lte, gte, lt, gt, in
                         - updated_at: exact, lte, gte, lt, gt, in
+            - Test case: added test case for retrieval of events to assert serializer && response status
         2- scrappy_app:
             - A crawler that's built on the Scrapy Framework that has two spiders:
                 - co_berlin: that scrapes the events on co_berlin website
                 - berghain: that scrapes the events on berghain website
 
             - This is scalable as we can define any other spider we need and handle its case and map it to our own serializer
+            - Scrapping done as a crontask that gets registered once the api container is up and running
+                - Cron job runs every 1 minute, this can be enhanced according to the needed time.
 **2- mysqldb:**
 
     - Built on top of mysql:5.7
