@@ -3,4 +3,4 @@ container:
 check_task:
   script:
     - pip3 install git+https://github.com/philipn/django-rest-framework-filters
-    - ls
+    - python3 manage.py test
