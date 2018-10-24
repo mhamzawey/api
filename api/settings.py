@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 import datetime
 import os
+import sys
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -101,9 +103,10 @@ DATABASES = {
         'PASSWORD': 'root',
         'HOST': 'mysqldb',
         'PORT': 3306,
-
-    }
+    },
 }
+if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
