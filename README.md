@@ -37,9 +37,10 @@
 2- docker-compose up -d --build
 
 3- wait 2-3 minutes till the composer builds and starts the containers
-P.S: sometimes cron tasks are not triggered automatically,
-so for testing purposes, execute the following command from your terminal:
-``docker exec -it api  python3 /app/scrapy_app/scrapy_events/core.py``
+
+**Important Note: sometimes cron tasks are not triggered automatically,
+so for testing purposes, execute the following command from your terminal:**
+``docker exec -it api  python3 /app/scrapy_app/scrapy_events/core.py`` 
 
 4- Go to your browser:
 
@@ -101,4 +102,19 @@ we have three docker contaiers:
     - There's another endpoint that can filter by dates that you can access via the swagger documentation `events/filter/`
     
  
+**To clean up everything afterwards, `docker-compose down` **
+
+
+
+**Future Enhancements:**
+    
+    - Writing all unit test cases for the three frameworks and triggering them in the .cirrus.yml CI:
+        - Django
+        - Scrapy
+        - ReactJs
+        
+    - Writing the whole cycle for deployment in the .cirrus.yml CD:
+        - Use ECS (AWS) to deploy the Django & Scrapy Container
+        - User RDS for the MySQL DB
+        - Use S3 (AWS) for ReactJS app
 
