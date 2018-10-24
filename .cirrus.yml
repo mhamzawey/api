@@ -1,3 +1,4 @@
 container:
   dockerfile: deployment/dev/Dockerfile
-  test_script: python3 manage.py test
+check_task:
+  script: python3 manage.py test
